@@ -5,11 +5,11 @@ test('Create: should create a task with generated id and TODO status', () => {
     const task = taskManager.create({
         title: 'Test Task',
         description: 'Test Description',
-        priority: 'high',
+        priority: 'HIGH',
     });
     assert.equal(task.title, 'Test Task');
     assert.equal(task.description, 'Test Description');
-    assert.equal(task.priority, 'high');
+    assert.equal(task.priority, 'HIGH');
     assert.equal(task.status, 'TODO');
     assert.ok(task.id);
     assert.ok(task.createdAt instanceof Date);
@@ -18,12 +18,12 @@ test('Create: should generate unique ids', () => {
     const task1 = taskManager.create({
         title: 'Task 1',
         description: 'Desc 1',
-        priority: 'low',
+        priority: 'LOW',
     });
     const task2 = taskManager.create({
         title: 'Task 2',
         description: 'Desc 2',
-        priority: 'medium',
+        priority: 'MEDIUM',
     });
     assert.notEqual(task1.id, task2.id);
 });
@@ -31,12 +31,12 @@ test('Read: findAll should return all tasks', () => {
     const task1 = taskManager.create({
         title: 'Task A',
         description: 'Desc A',
-        priority: 'high',
+        priority: 'HIGH',
     });
     const task2 = taskManager.create({
         title: 'Task B',
         description: 'Desc B',
-        priority: 'low',
+        priority: 'LOW',
     });
     const allTasks = taskManager.findAll();
     assert.ok(allTasks.length >= 2);
@@ -47,7 +47,7 @@ test('Read: findById should return task by id', () => {
     const created = taskManager.create({
         title: 'Find Me',
         description: 'Description',
-        priority: 'medium',
+        priority: 'MEDIUM',
     });
     const found = taskManager.findById(created.id);
     assert.ok(found);
@@ -62,7 +62,7 @@ test('Update: should update provided fields', () => {
     const task = taskManager.create({
         title: 'Original',
         description: 'Original Desc',
-        priority: 'low',
+        priority: 'LOW',
     });
     const updated = taskManager.update(task.id, {
         title: 'Updated',
@@ -71,14 +71,14 @@ test('Update: should update provided fields', () => {
     assert.ok(updated);
     assert.equal(updated.title, 'Updated');
     assert.equal(updated.description, 'Original Desc');
-    assert.equal(updated.priority, 'low');
+    assert.equal(updated.priority, 'LOW');
     assert.equal(updated.status, 'IN_PROGRESS');
 });
 test('Update: should not alter id on update', () => {
     const task = taskManager.create({
         title: 'Test',
         description: 'Desc',
-        priority: 'high',
+        priority: 'HIGH',
     });
     const originalId = task.id;
     taskManager.update(task.id, {
@@ -92,7 +92,7 @@ test('Update: should not alter createdAt on update', () => {
     const task = taskManager.create({
         title: 'Test',
         description: 'Desc',
-        priority: 'high',
+        priority: 'HIGH',
     });
     const originalCreatedAt = task.createdAt;
     taskManager.update(task.id, {
@@ -112,7 +112,7 @@ test('Delete: should delete task by id', () => {
     const task = taskManager.create({
         title: 'To Delete',
         description: 'Will be deleted',
-        priority: 'low',
+        priority: 'LOW',
     });
     const deleted = taskManager.delete(task.id);
     assert.equal(deleted, true);

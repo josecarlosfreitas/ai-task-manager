@@ -1,4 +1,4 @@
-export type Priority = 'low' | 'medium' | 'high';
+export type Priority = 'LOW' | 'MEDIUM' | 'HIGH';
 export type Status = 'TODO' | 'IN_PROGRESS' | 'DONE';
 export interface Task {
     id: string;
